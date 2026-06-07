@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hedgehog Café – Chandigarh's Signature Breakfast & Gourmet Experience</title>
+<meta name="description" content="The Hedgehog Café – Chandigarh's premier book café. Signature breakfast, gourmet burgers, artisan pizza, and more. SCF 12, Sector 7-C, Chandigarh.">
+<meta name="keywords" content="Hedgehog Cafe Chandigarh, breakfast cafe Chandigarh, book cafe, gourmet burger, pizza Chandigarh, Sector 7">
+<meta property="og:title" content="The Hedgehog Café – Chandigarh">
+<meta property="og:description" content="A cozy, book-lined haven where every dish tells a story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ═══════════════════════════════════════════
+   CSS VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root {
+  --ink: #1a1008;
+  --parchment: #f5ede0;
+  --cream: #fdf8f0;
+  --leather: #8b4513;
+  --mahogany: #4a1c02;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --amber: #d4850a;
+  --sage: #6b7c5a;
+  --dusty-rose: #c8856a;
+  --spine-red: #8b1a1a;
+  --glass-white: rgba(255,255,255,0.08);
+  --glass-border: rgba(201,168,76,0.25);
+  --shadow-warm: rgba(74, 28, 2, 0.35);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-text: 'Crimson Text', serif;
+  --font-ui: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════ */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s;
+  opacity: 0.6;
+}
+.cursor.hover { width: 20px; height: 20px; background: var(--gold-light); }
+.cursor-ring.hover { width: 52px; height: 52px; opacity: 0.3; }
+
+/* ═══════════════════════════════════════════
+   BOOK OPENING INTRO ANIMATION
+═══════════════════════════════════════════ */
+#book-intro {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--mahogany);
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1200px;
+}
+.book-scene {
+  position: relative; width: 340px; height: 480px;
+  transform-style: preserve-3d;
+  animation: bookOpen 3s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+}
+.book-cover-left, .book-cover-right {
+  position: absolute; top: 0; width: 50%; height: 100%;
+  background: linear-gradient(135deg, #2d0f00 0%, #5c1a00 40%, #8b3a00 100%);
+  border: 2px solid var(--gold);
+  transform-origin: center;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.book-cover-left { left: 0; transform-origin: right center; border-right: none; }
+.book-cover-right { right: 0; transform-origin: left center; border-left: none; }
+.book-cover-left::before, .book-cover-right::before {
+  content: '';
+  position: absolute; inset: 8px;
+  border: 1px solid rgba(201,168,76,0.4);
+  pointer-events: none;
+}
+.book-spine-art {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 12px 0;
+  opacity: 0.9;
+}
+.book-cover-left .hedgehog-svg { transform: rotate(0deg); }
+.book-pages {
+  position: absolute; top: 2px; left: 50%; width: 6px;
+  height: calc(100% - 4px); margin-left: -3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #f5ede0 0px, #e8d5c0 2px, #f5ede0 4px
+  );
+  box-shadow: 0 0 20px rgba(201,168,76,0.4);
+}
+.book-tagline {
+  position: absolute;
+  bottom: 24px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: italic;
+}
+@keyframes bookOpen {
+  0% { transform: rotateY(0deg); }
+  30% { transform: rotateY(-5deg); }
+  100% { transform: rotateY(0deg); }
+}
+.book-cover-left { animation: leftPageOpen 3s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards; }
+.book-cover-right { animation: rightPageOpen 3s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards; }
+@keyframes leftPageOpen {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-170deg); }
+}
+@keyframes rightPageOpen {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(170deg); }
+}
+#book-intro { animation: fadeOutIntro 0.6s ease 3.6s forwards; }
+@keyframes fadeOutIntro {
+  0% { opacity: 1; pointer-events: all; }
+  100% { opacity: 0; pointer-events: none; }
+}
+.hedgehog-icon-intro {
+  font-size: 3.5rem;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+@keyframes iconPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 2rem;
+  background: rgba(15, 8, 2, 0.88);
+  backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(10, 5, 1, 0.97);
+  border-bottom-color: rgba(201,168,76,0.3);
+}
+.nav-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; flex-shrink: 0;
+}
+.nav-logo-img {
+  width: 48px; height: 48px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+}
+.nav-logo-fallback {
+  width: 48px; height: 48px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--mahogany), var(--leather));
+}
+.nav-logo-text {
+  display: flex; flex-direction: column;
+}
+.nav-logo-text span:first-child {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.nav-logo-text span:last-child {
+  font-family: var(--font-body);
+  font-size: 0.7rem; color: rgba(245,237,224,0.6);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 0;
+  list-style: none;
+}
+.nav-links > li { position: relative; }
+.nav-links > li > a, .nav-links > li > button {
+  display: block; padding: 0 14px;
+  font-family: var(--font-ui); font-size: 0.78rem;
+  color: rgba(245,237,224,0.75);
+  text-decoration: none; text-transform: uppercase;
+  letter-spacing: 0.1em; font-weight: 500;
+  transition: color 0.3s;
+  background: none; border: none; cursor: none;
+  line-height: 72px; height: 72px;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover, .nav-links > li > button:hover { color: var(--gold); }
+.nav-links > li:hover .dropdown { display: block; }
+.dropdown {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: rgba(15, 8, 2, 0.97);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-top: 2px solid var(--gold);
+  min-width: 200px; z-index: 100;
+  backdrop-filter: blur(20px);
+}
+.dropdown a {
+  display: block; padding: 10px 20px;
+  font-family: var(--font-ui); font-size: 0.75rem;
+  color: rgba(245,237,224,0.7);
+  text-decoration: none; text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.dropdown a:hover { color: var(--gold); background: rgba(201,168,76,0.06); padding-left: 28px; }
+
+.nav-cta {
+  display: flex; gap: 10px; align-items: center; flex-shrink: 0;
+}
+.btn-nav {
+  padding: 9px 18px;
+  font-family: var(--font-ui); font-size: 0.75rem;
+  font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em;
+  border: 1px solid var(--gold); color: var(--gold);
+  background: transparent; border-radius: 2px;
+  cursor: none; text-decoration: none;
+  transition: all 0.3s; white-space: nowrap;
+}
+.btn-nav:hover { background: var(--gold); color: var(--ink); }
+.btn-nav-solid {
+  background: var(--gold); color: var(--ink);
+  padding: 9px 18px;
+  font-family: var(--font-ui); font-size: 0.75rem;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+  border: 1px solid var(--gold); border-radius: 2px;
+  cursor: none; text-decoration: none;
+  transition: all 0.3s; white-space: nowrap;
+}
+.btn-nav-solid:hover { background: var(--gold-light); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: all 0.3s; }
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════════ */
+#hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('images/home-hero.jpg');
+  background-size: cover; background-position: center 30%;
+  transform: scale(1.08);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+  filter: brightness(0.45) saturate(1.2);
+}
+@keyframes heroZoom {
+  0% { transform: scale(1.08) translateY(0px); }
+  100% { transform: scale(1.15) translateY(-20px); }
+}
+.hero-bg-fallback {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139,58,0,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(74,28,2,0.8) 0%, transparent 50%),
+    linear-gradient(160deg, #0f0803 0%, #2d1200 30%, #1a0900 60%, #0a0503 100%);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10,5,1,0.3) 0%,
+    rgba(10,5,1,0.1) 30%,
+    rgba(10,5,1,0.4) 70%,
+    rgba(10,5,1,0.9) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 0 2rem;
+  max-width: 900px;
+  animation: heroContentIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 4s both;
+}
+@keyframes heroContentIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-ui); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.35em;
+  color: var(--gold); margin-bottom: 1.2rem;
+  position: relative; padding: 0 20px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '—'; position: absolute; top: 50%; transform: translateY(-50%);
+  color: var(--gold); opacity: 0.6;
+}
+.hero-eyebrow::before { left: 0; }
+.hero-eyebrow::after { right: 0; }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+.hero-title .accent { color: var(--gold); font-style: italic; }
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: rgba(245,237,224,0.75); font-weight: 300;
+  font-style: italic; margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+.hero-divider {
+  width: 80px; height: 1px; background: var(--gold);
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.hero-divider::before {
+  content: '◆'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold); font-size: 0.5rem;
+  background: transparent;
+}
+.hero-actions {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.btn-hero {
+  padding: 14px 32px;
+  font-family: var(--font-ui); font-size: 0.8rem;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
+  text-decoration: none; border-radius: 2px;
+  cursor: none; transition: all 0.35s;
+  position: relative; overflow: hidden;
+}
+.btn-primary {
+  background: var(--gold); color: var(--ink);
+  border: 2px solid var(--gold);
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+.btn-outline {
+  background: transparent; color: var(--cream);
+  border: 2px solid rgba(245,237,224,0.5);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: var(--font-ui); font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: rgba(245,237,224,0.5);
+  animation: bounceScroll 2s ease-in-out infinite;
+  cursor: none;
+}
+.hero-scroll i { font-size: 1rem; color: var(--gold); }
+@keyframes bounceScroll {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION BASE STYLES
+═══════════════════════════════════════════ */
+section { position: relative; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-pad { padding: 100px 0; }
+.section-label {
+  font-family: var(--font-ui); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.35em;
+  color: var(--gold); margin-bottom: 1rem;
+  display: block;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700; line-height: 1.15;
+  color: var(--cream); margin-bottom: 1.2rem;
+}
+.section-title .italic { font-style: italic; color: var(--gold); }
+.section-body {
+  font-family: var(--font-text); font-size: 1.15rem;
+  color: rgba(245,237,224,0.65); line-height: 1.8;
+  max-width: 640px;
+}
+.ornament { color: var(--gold); font-size: 1.2rem; margin: 0 0.4rem; opacity: 0.7; }
+
+/* Fade-in on scroll */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════
+   STORY SECTION
+═══════════════════════════════════════════ */
+#story {
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+#story::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url('images/bg-bookshelf.jpg');
+  background-size: cover; background-position: center;
+  opacity: 0.07;
+}
+.story-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center;
+}
+.story-visual {
+  position: relative;
+}
+.story-img-frame {
+  position: relative; padding: 16px;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.story-img-frame::before {
+  content: '';
+  position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px;
+  border: 1px solid rgba(201,168,76,0.08);
+}
+.story-main-img {
+  width: 100%; aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #2d1200 0%, #5c2a00 50%, #3d1a00 100%);
+}
+.story-img-accent {
+  position: absolute; bottom: -24px; right: -24px;
+  width: 45%; aspect-ratio: 1;
+  border: 6px solid var(--ink);
+  object-fit: cover;
+  background: linear-gradient(135deg, #1a0900 0%, #3d1a00 100%);
+}
+.story-img-badge {
+  position: absolute; top: 24px; left: -16px;
+  background: var(--gold);
+  color: var(--ink); padding: 12px 20px;
+  font-family: var(--font-display); font-size: 0.85rem;
+  font-weight: 700; text-align: center;
+  box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+  line-height: 1.3;
+}
+.story-img-badge span { display: block; font-size: 1.4rem; font-weight: 900; }
+.story-feats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 2rem;
+}
+.story-feat {
+  padding: 16px 20px;
+  border: 1px solid rgba(201,168,76,0.15);
+  background: rgba(255,255,255,0.02);
+}
+.story-feat .icon { font-size: 1.2rem; margin-bottom: 6px; }
+.story-feat h4 {
+  font-family: var(--font-display); font-size: 0.9rem;
+  color: var(--gold); margin-bottom: 3px;
+}
+.story-feat p { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(245,237,224,0.5); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   SIGNATURE DISHES MARQUEE
+═══════════════════════════════════════════ */
+#signature-marquee {
+  padding: 28px 0; overflow: hidden;
+  border-top: 1px solid rgba(201,168,76,0.12);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  background: rgba(201,168,76,0.04);
+}
+.marquee-track {
+  display: flex; gap: 48px;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--font-display); font-size: 1.05rem;
+  font-style: italic; color: rgba(245,237,224,0.55);
+  white-space: nowrap; font-weight: 400;
+}
+.marquee-sep { color: var(--gold); font-size: 0.5rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ═══════════════════════════════════════════
+   MENU SECTION
+═══════════════════════════════════════════ */
+#menu {
+  background: #120800;
+  position: relative;
+}
+#menu::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url('images/bg-wood.jpg');
+  background-size: cover;
+  opacity: 0.05;
+}
+.menu-tabs {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  margin-bottom: 48px; overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu-tabs::-webkit-scrollbar { display: none; }
+.menu-tab {
+  padding: 14px 22px;
+  font-family: var(--font-ui); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(245,237,224,0.45); background: none; border: none;
+  cursor: none; position: relative;
+  transition: color 0.3s; white-space: nowrap;
+}
+.menu-tab::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.3s;
+}
+.menu-tab:hover { color: rgba(245,237,224,0.8); }
+.menu-tab.active { color: var(--gold); }
+.menu-tab.active::after { transform: scaleX(1); }
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+.menu-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.menu-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 0; overflow: hidden;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.menu-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,168,76,0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.menu-card-img {
+  width: 100%; height: 200px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #1a0900, #3d1a00, #2d1200);
+  position: relative;
+}
+.menu-card-img-placeholder {
+  width: 100%; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #1a0900, #3d1a00);
+}
+.menu-card-body { padding: 20px; }
+.menu-card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; margin-bottom: 8px;
+}
+.menu-card-name {
+  font-family: var(--font-display); font-size: 1.05rem;
+  font-weight: 600; color: var(--cream); line-height: 1.25;
+  flex: 1;
+}
+.menu-card-price {
+  font-family: var(--font-display); font-size: 1.05rem;
+  color: var(--gold); font-weight: 700; white-space: nowrap;
+}
+.menu-card-desc {
+  font-family: var(--font-text); font-size: 0.9rem;
+  color: rgba(245,237,224,0.5); line-height: 1.6;
+  margin-bottom: 16px;
+}
+.menu-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.veg-badge, .nonveg-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-ui); font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 8px;
+  border: 1px solid; border-radius: 2px;
+}
+.veg-badge { color: #5a9f5a; border-color: #5a9f5a; }
+.nonveg-badge { color: #c8533a; border-color: #c8533a; }
+.veg-dot { width: 6px; height: 6px; border-radius: 50%; background: #5a9f5a; }
+.nonveg-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8533a; }
+.btn-add {
+  padding: 7px 16px;
+  font-family: var(--font-ui); font-size: 0.68rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  background: transparent; color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.4);
+  cursor: none; border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-add:hover { background: var(--gold); color: var(--ink); }
+.menu-section-title {
+  font-family: var(--font-display); font-size: 1.4rem;
+  font-style: italic; color: var(--gold);
+  margin-bottom: 8px;
+}
+.menu-section-note {
+  font-family: var(--font-text); font-size: 0.9rem;
+  color: rgba(245,237,224,0.4); margin-bottom: 32px;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   INSTAGRAM REELS CAROUSEL
+═══════════════════════════════════════════ */
+#life-at-hedgehog {
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+#life-at-hedgehog::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(139,58,0,0.12) 0%, transparent 60%);
+}
+.reels-carousel {
+  display: flex; gap: 20px; overflow-x: auto;
+  scrollbar-width: none; padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+}
+.reels-carousel::-webkit-scrollbar { display: none; }
+.reel-card {
+  flex: 0 0 280px; height: 500px;
+  scroll-snap-align: start;
+  border-radius: 12px; overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, #1a0900 0%, #3d1a00 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.reel-card iframe {
+  width: 100%; height: 100%; border: none;
+  pointer-events: all;
+}
+.reel-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  background: linear-gradient(160deg, #1a0900 0%, #2d1200 50%, #1a0900 100%);
+}
+.reel-placeholder i { font-size: 3rem; color: var(--gold); opacity: 0.6; }
+.reel-placeholder span { font-family: var(--font-display); font-size: 0.85rem; color: rgba(245,237,224,0.4); text-align: center; }
+.reel-ig-overlay {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  padding: 6px 10px; border-radius: 20px;
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-ui); font-size: 0.68rem; color: white;
+}
+.reel-ig-overlay i { color: #e1306c; }
+.carousel-controls {
+  display: flex; justify-content: center; gap: 12px; margin-top: 32px;
+}
+.carousel-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent; color: var(--gold);
+  cursor: none; font-size: 0.9rem;
+  transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.carousel-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   3D GALLERY / PHOTO WALL
+═══════════════════════════════════════════ */
+#gallery {
+  background: #0d0600;
+  position: relative;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 220px);
+  gap: 12px;
+}
+.gallery-item {
+  position: relative; overflow: hidden;
+  cursor: none;
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s;
+  transform-style: preserve-3d;
+}
+.gallery-item:hover { transform: scale(1.03) rotateX(2deg) rotateY(-1deg); box-shadow: 0 20px 60px rgba(0,0,0,0.7); z-index: 2; }
+.gallery-item img, .gallery-img-placeholder {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform 0.6s;
+}
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-img-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+}
+.gallery-item:nth-child(1) { grid-column: 1/5; grid-row: 1/3; }
+.gallery-item:nth-child(2) { grid-column: 5/9; grid-row: 1/2; }
+.gallery-item:nth-child(3) { grid-column: 9/13; grid-row: 1/3; }
+.gallery-item:nth-child(4) { grid-column: 5/7; grid-row: 2/3; }
+.gallery-item:nth-child(5) { grid-column: 7/9; grid-row: 2/3; }
+.gallery-item:nth-child(6) { grid-column: 1/5; grid-row: 3/4; }
+.gallery-item:nth-child(7) { grid-column: 5/9; grid-row: 3/4; }
+.gallery-item:nth-child(8) { grid-column: 9/13; grid-row: 3/4; }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,5,1,0.85) 100%);
+  opacity: 0; transition: opacity 0.4s;
+  display: flex; align-items: flex-end; padding: 16px;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption {
+  font-family: var(--font-display); font-size: 0.85rem;
+  font-style: italic; color: var(--cream);
+}
+
+/* ═══════════════════════════════════════════
+   RESERVATION SECTION
+═══════════════════════════════════════════ */
+#reservation {
+  background: linear-gradient(160deg, #0d0600 0%, #1a0900 50%, #0d0600 100%);
+  position: relative; overflow: hidden;
+}
+#reservation::before {
+  content: '';
+  position: absolute; top: -50%; left: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.reservation-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: start;
+}
+.reservation-form-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.18);
+  padding: 48px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { margin-bottom: 24px; }
+.form-group label {
+  display: block;
+  font-family: var(--font-ui); font-size: 0.68rem;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(245,237,224,0.5); margin-bottom: 8px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  color: var(--cream);
+  font-family: var(--font-text); font-size: 1rem;
+  outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--gold);
+}
+.form-group select { cursor: none; }
+.form-group select option { background: #1a0900; }
+.btn-reserve {
+  width: 100%; padding: 16px;
+  background: var(--gold); color: var(--ink);
+  font-family: var(--font-ui); font-size: 0.8rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+  border: none; cursor: none;
+  transition: all 0.3s;
+}
+.btn-reserve:hover { background: var(--gold-light); transform: translateY(-2px); }
+.reservation-info { padding-top: 20px; }
+.platform-links {
+  display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 2rem;
+}
+.platform-link {
+  display: flex; align-items: center; gap: 16px; padding: 18px 24px;
+  border: 1px solid rgba(201,168,76,0.15);
+  background: rgba(255,255,255,0.02);
+  text-decoration: none; color: var(--cream);
+  transition: all 0.3s;
+}
+.platform-link:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
+.platform-link .platform-icon { font-size: 1.5rem; width: 36px; text-align: center; }
+.platform-link .platform-text strong {
+  display: block; font-family: var(--font-display); font-size: 1rem;
+  color: var(--gold); margin-bottom: 2px;
+}
+.platform-link .platform-text span { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(245,237,224,0.45); }
+.reservation-hours { margin-top: 2rem; padding: 24px; border-left: 3px solid var(--gold); }
+.hours-title { font-family: var(--font-display); font-size: 1rem; color: var(--gold); margin-bottom: 12px; }
+.hours-row {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-ui); font-size: 0.78rem;
+  color: rgba(245,237,224,0.55); padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ═══════════════════════════════════════════
+   REVIEWS SECTION
+═══════════════════════════════════════════ */
+#reviews {
+  background: var(--ink);
+  position: relative;
+}
+.reviews-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  margin-bottom: 64px; text-align: center;
+}
+.review-stat {
+  padding: 32px 20px;
+  border: 1px solid rgba(201,168,76,0.15);
+  background: rgba(255,255,255,0.02);
+}
+.review-stat-num {
+  font-family: var(--font-display); font-size: 2.8rem;
+  font-weight: 900; color: var(--gold); display: block; line-height: 1;
+  margin-bottom: 6px;
+}
+.review-stat-label {
+  font-family: var(--font-ui); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(245,237,224,0.45);
+}
+.reviews-slider { position: relative; overflow: hidden; }
+.reviews-track {
+  display: flex; gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.review-card {
+  flex: 0 0 calc(33.333% - 16px);
+  padding: 36px;
+  border: 1px solid rgba(201,168,76,0.12);
+  background: rgba(255,255,255,0.02);
+  position: relative;
+}
+.review-card::before {
+  content: '"';
+  position: absolute; top: 16px; left: 24px;
+  font-family: var(--font-display); font-size: 5rem;
+  color: rgba(201,168,76,0.12); line-height: 1;
+  font-weight: 900;
+}
+.review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 16px; letter-spacing: 2px; }
+.review-text {
+  font-family: var(--font-text); font-size: 1rem;
+  color: rgba(245,237,224,0.7); line-height: 1.75;
+  margin-bottom: 20px; font-style: italic;
+}
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--mahogany), var(--leather));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1rem; color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3); flex-shrink: 0;
+}
+.review-author-info strong {
+  display: block; font-family: var(--font-display); font-size: 0.95rem;
+  color: var(--cream);
+}
+.review-author-info span {
+  font-family: var(--font-ui); font-size: 0.68rem;
+  color: rgba(245,237,224,0.4); text-transform: uppercase; letter-spacing: 0.1em;
+}
+.reviews-nav { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
+.review-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(201,168,76,0.3); cursor: none;
+  transition: all 0.3s; border: none;
+}
+.review-dot.active { background: var(--gold); width: 24px; border-radius: 3px; }
+
+/* ═══════════════════════════════════════════
+   LOCATION & CONTACT
+═══════════════════════════════════════════ */
+#contact {
+  background: #0d0600;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.contact-info { padding: 60px; border-right: 1px solid rgba(201,168,76,0.15); }
+.contact-map { height: 500px; overflow: hidden; }
+.contact-map iframe { width: 100%; height: 100%; border: none; filter: sepia(0.3) contrast(0.9) brightness(0.8); }
+.contact-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.contact-icon {
+  width: 40px; height: 40px; border-radius: 2px;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.9rem; flex-shrink: 0;
+}
+.contact-detail strong {
+  display: block; font-family: var(--font-display); font-size: 0.85rem;
+  color: var(--gold); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em;
+}
+.contact-detail span, .contact-detail a {
+  font-family: var(--font-text); font-size: 1rem;
+  color: rgba(245,237,224,0.65); line-height: 1.6;
+  text-decoration: none; display: block;
+}
+.contact-detail a:hover { color: var(--gold); }
+.social-links { display: flex; gap: 12px; margin-top: 32px; }
+.social-link {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(245,237,224,0.6); font-size: 1rem;
+  text-decoration: none; transition: all 0.3s;
+}
+.social-link:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   CART WIDGET
+═══════════════════════════════════════════ */
+#cart-widget {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 800;
+  display: none;
+}
+.cart-btn {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--gold); color: var(--ink);
+  border: none; cursor: none; font-size: 1.2rem;
+  box-shadow: 0 8px 30px rgba(201,168,76,0.5);
+  transition: all 0.3s; position: relative;
+}
+.cart-btn:hover { transform: scale(1.08); }
+.cart-count {
+  position: absolute; top: -4px; right: -4px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--spine-red); color: white;
+  font-family: var(--font-ui); font-size: 0.72rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.cart-panel {
+  position: absolute; bottom: 72px; right: 0;
+  width: 340px; max-height: 500px;
+  background: rgba(15, 8, 2, 0.98);
+  border: 1px solid rgba(201,168,76,0.3);
+  backdrop-filter: blur(20px);
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+.cart-panel.open { display: flex; }
+.cart-panel-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  font-family: var(--font-display); font-size: 1rem;
+  color: var(--gold); display: flex; justify-content: space-between; align-items: center;
+}
+.cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
+.cart-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-text); font-size: 0.95rem; color: var(--cream);
+}
+.cart-item-price { color: var(--gold); font-weight: 600; }
+.cart-empty { text-align: center; padding: 32px; color: rgba(245,237,224,0.4); font-style: italic; }
+.cart-footer {
+  padding: 20px 24px; border-top: 1px solid rgba(201,168,76,0.15);
+}
+.cart-total { display: flex; justify-content: space-between; margin-bottom: 16px; font-family: var(--font-display); }
+.cart-total span:last-child { color: var(--gold); font-size: 1.2rem; font-weight: 700; }
+.btn-checkout { width: 100%; padding: 14px; background: var(--gold); color: var(--ink); font-family: var(--font-ui); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; border: none; cursor: none; transition: all 0.3s; }
+.btn-checkout:hover { background: var(--gold-light); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  background: #080400;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand p {
+  font-family: var(--font-text); font-size: 1rem;
+  color: rgba(245,237,224,0.45); line-height: 1.7; margin-top: 16px;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-family: var(--font-display); font-size: 1rem; color: var(--gold);
+  margin-bottom: 20px; font-weight: 600;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-family: var(--font-ui); font-size: 0.78rem;
+  color: rgba(245,237,224,0.45); text-decoration: none;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  transition: color 0.3s;
+}
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-copy {
+  font-family: var(--font-ui); font-size: 0.72rem;
+  color: rgba(245,237,224,0.3); letter-spacing: 0.08em;
+}
+.footer-tagline {
+  font-family: var(--font-display); font-size: 0.85rem;
+  font-style: italic; color: rgba(201,168,76,0.5);
+}
+
+/* ═══════════════════════════════════════════
+   NOTIFICATION TOAST
+═══════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 6rem; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: rgba(15,8,2,0.97); border: 1px solid var(--gold);
+  color: var(--cream); padding: 14px 28px;
+  font-family: var(--font-ui); font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  z-index: 9000; opacity: 0;
+  transition: all 0.4s; pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .story-grid, .reservation-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+  .contact-grid { border: none; }
+  .contact-map { height: 350px; }
+  .reservation-grid { gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(4, 200px); }
+  .gallery-item:nth-child(1) { grid-column: 1/4; grid-row: 1/3; }
+  .gallery-item:nth-child(2) { grid-column: 4/7; grid-row: 1/2; }
+  .gallery-item:nth-child(3) { grid-column: 4/7; grid-row: 2/3; }
+  .gallery-item:nth-child(4) { grid-column: 1/3; grid-row: 3/4; }
+  .gallery-item:nth-child(5) { grid-column: 3/5; grid-row: 3/4; }
+  .gallery-item:nth-child(6) { grid-column: 5/7; grid-row: 3/4; }
+  .gallery-item:nth-child(7) { grid-column: 1/4; grid-row: 4/5; }
+  .gallery-item:nth-child(8) { grid-column: 4/7; grid-row: 4/5; }
+  .reviews-stats { grid-template-columns: repeat(2, 1fr); }
+  .review-card { flex: 0 0 calc(50% - 12px); }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.4rem; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .review-card { flex: 0 0 calc(100% - 0px); }
+  .reservation-form-card { padding: 28px; }
+  .contact-info { padding: 36px; }
+  .reviews-stats { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+  .section-pad { padding: 72px 0; }
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(10, 5, 1, 0.98); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a, .mobile-nav button {
+  font-family: var(--font-display); font-size: 1.6rem;
+  color: rgba(245,237,224,0.8); text-decoration: none;
+  padding: 8px 0; background: none; border: none; cursor: pointer;
+  transition: color 0.2s;
+}
+.mobile-nav a:hover, .mobile-nav button:hover { color: var(--gold); }
+.mobile-nav-close {
+  position: absolute; top: 24px; right: 24px;
+  font-size: 1.5rem; color: var(--gold); background: none;
+  border: none; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- CART -->
+<div id="cart-widget">
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-panel-header">
+      <span>Your Order</span>
+      <button onclick="toggleCart()" style="background:none;border:none;color:var(--gold);cursor:none;font-size:1rem;">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">Your table is empty — start ordering!</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total</span><span id="cartTotal">₹0</span></div>
+      <button class="btn-checkout" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </div>
+  <button class="cart-btn" onclick="toggleCart()">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</div>
+
+<!-- BOOK INTRO ANIMATION -->
+<div id="book-intro">
+  <div class="book-scene">
+    <div class="book-cover-left">
+      <div class="book-spine-art">The Hedgehog Café</div>
+    </div>
+    <div class="book-pages"></div>
+    <div class="book-cover-right">
+      <div class="hedgehog-icon-intro">🦔</div>
+      <div class="book-tagline">Est. in Chandigarh · SCF 12, Sector 7‑C</div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileNav()"><i class="fas fa-times"></i></button>
+  <a href="#hero" onclick="toggleMobileNav()">Home</a>
+  <a href="#menu" onclick="toggleMobileNav()">Menu</a>
+  <a href="#reservation" onclick="toggleMobileNav()">Reserve a Table</a>
+  <a href="#menu" onclick="toggleMobileNav()">Order Online</a>
+  <a href="#story" onclick="toggleMobileNav()">About Us</a>
+  <a href="#gallery" onclick="toggleMobileNav()">Gallery</a>
+  <a href="#reviews" onclick="toggleMobileNav()">Reviews</a>
+  <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-fallback">🦔</div>
+      <div class="nav-logo-text">
+        <span>The Hedgehog</span>
+        <span>Café · Chandigarh</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li>
+        <button>Menu ▾</button>
+        <div class="dropdown">
+          <a href="#menu" onclick="switchTab('breakfast')">Breakfast</a>
+          <a href="#menu" onclick="switchTab('sandwiches')">Sandwiches</a>
+          <a href="#menu" onclick="switchTab('burgers')">Burgers</a>
+          <a href="#menu" onclick="switchTab('pasta')">Pasta</a>
+          <a href="#menu" onclick="switchTab('pizza')">Pizza</a>
+          <a href="#menu" onclick="switchTab('grills')">Grills</a>
+          <a href="#menu" onclick="switchTab('salads')">Salads</a>
+          <a href="#menu" onclick="switchTab('starters')">Starters</a>
+          <a href="#menu" onclick="switchTab('desserts')">Desserts</a>
+          <a href="#menu" onclick="switchTab('beverages')">Beverages</a>
+        </div>
+      </li>
+      <li><a href="#story">About Us</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#menu" class="btn-nav">Order Online</a>
+      <a href="#reservation" class="btn-nav-solid">Reserve a Table</a>
+    </div>
+    <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-fallback"></div>
+  <div class="hero-bg" style="background-image: url('images/home-hero.jpg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Est. in Chandigarh · SCF 12, Sector 7‑C</span>
+    <h1 class="hero-title">The Hedgehog<br><span class="accent">Café</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">Chandigarh's Signature Breakfast & Gourmet Experience<br>Where every dish tells a story, and every corner holds a tale.</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-hero btn-primary">Reserve a Table</a>
+      <a href="#menu" class="btn-hero btn-outline">Order Online</a>
+      <a href="#menu" class="btn-hero btn-outline">Explore Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll to discover</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- SIGNATURE MARQUEE -->
+<div id="signature-marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span>🦔</span> The English Breakfast <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥞</span> Peter Pan Cake <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍔</span> Chicken Farm Bacon <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍕</span> Alfredo In Wonderland <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>☕</span> Cappuccino Tart <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥗</span> Zucchini In The Bottle <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍖</span> Moby Stick <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍰</span> Mississippi Mud Cake <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥩</span> Gone Grill <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🫙</span> Don Corn Bacon <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🦔</span> The English Breakfast <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥞</span> Peter Pan Cake <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍔</span> Chicken Farm Bacon <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍕</span> Alfredo In Wonderland <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>☕</span> Cappuccino Tart <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥗</span> Zucchini In The Bottle <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍖</span> Moby Stick <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🍰</span> Mississippi Mud Cake <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🥩</span> Gone Grill <span class="marquee-sep">◆</span></div>
+    <div class="marquee-item"><span>🫙</span> Don Corn Bacon <span class="marquee-sep">◆</span></div>
+  </div>
+</div>
+
+<!-- STORY / ABOUT -->
+<section id="story" class="section-pad">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <div class="story-img-frame">
+          <div class="story-img-badge"><span>9+</span>Years of<br>Stories</div>
+          <div class="story-main-img" style="display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(135deg,#2d1200,#5c2a00,#3d1a00);">
+            <img src="images/gallery1.jpg" alt="Hedgehog Cafe Interior" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.parentNode.innerHTML='🦔'">
+          </div>
+          <img src="images/gallery2.jpg" class="story-img-accent" alt="Cafe Ambiance" onerror="this.style.background='linear-gradient(135deg,#1a0900,#3d1a00)';this.src=''">
+        </div>
+        <div class="story-feats" style="margin-top:48px;">
+          <div class="story-feat">
+            <div class="icon">📚</div>
+            <h4>Book‑Lined Walls</h4>
+            <p>Hundreds of titles competing for your attention</p>
+          </div>
+          <div class="story-feat">
+            <div class="icon">🎵</div>
+            <h4>Live Events</h4>
+            <p>Stand‑up, live bands, poetry & author readings</p>
+          </div>
+          <div class="story-feat">
+            <div class="icon">☕</div>
+            <h4>Artisan Coffee</h4>
+            <p>Cold brew, hazelnut latte & signature frappe</p>
+          </div>
+          <div class="story-feat">
+            <div class="icon">🌿</div>
+            <h4>Veg & Non‑Veg</h4>
+            <p>Extensive menu for every palate</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">Every Dish<br>Has a <span class="italic">Tale</span></h2>
+        <p class="section-body" style="margin-bottom:2rem;">
+          Nestled in the Inner Market of Sector 7‑C, The Hedgehog Café is Chandigarh's most beloved literary‑themed dining destination. We're not just a café — we're a cozy haven where books line the walls, good music fills the air, and every dish on our menu is named after a literary character or tale.
+        </p>
+        <p class="section-body" style="margin-bottom:2rem;">
+          Walk in, find a quiet corner, open a book — or just let the warm wood-panelled interiors and the scent of fresh coffee slow you down. Freelancers, writers, families, friends: everyone finds their chapter here.
+        </p>
+        <p class="section-body" style="margin-bottom:2.5rem;">
+          Our kitchen crafts everything from a hearty English Breakfast and Peter Pan Cakes to Alfredo In Wonderland pasta and Gone Grill — all with the same literary passion that defines our space.
+        </p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="#menu" class="btn-hero btn-primary" style="font-size:0.78rem;padding:12px 28px;">Explore Menu</a>
+          <a href="#reservation" class="btn-hero btn-outline" style="font-size:0.78rem;padding:12px 28px;">Book a Table</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <span class="section-label">Our Menu</span>
+      <h2 class="section-title">A Literary <span class="italic">Feast</span></h2>
+      <p class="section-body">Every dish named after a story, every bite a new chapter. Rated 4.2★ on Justdial · Price for two ₹1,200–1,500</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs">
+      <button class="menu-tab active" data-tab="breakfast">Breakfast</button>
+      <button class="menu-tab" data-tab="sandwiches">Sandwiches</button>
+      <button class="menu-tab" data-tab="burgers">Burgers</button>
+      <button class="menu-tab" data-tab="grills">Grills</button>
+      <button class="menu-tab" data-tab="pasta">Pasta</button>
+      <button class="menu-tab" data-tab="pizza">Pizza</button>
+      <button class="menu-tab" data-tab="salads">Salads</button>
+      <button class="menu-tab" data-tab="starters">Starters</button>
+      <button class="menu-tab" data-tab="desserts">Desserts</button>
+      <button class="menu-tab" data-tab="beverages">Beverages</button>
+    </div>
+
+    <!-- BREAKFAST -->
+    <div class="menu-panel active" id="panel-breakfast">
+      <div class="menu-section-title">Bridget Jones' Diary <span class="ornament">—</span> Breakfast</div>
+      <div class="menu-section-note">"The most important story of the day, told over a generous plate."</div>
+      <div class="menu-grid" id="menu-breakfast"></div>
+    </div>
+
+    <!-- SANDWICHES -->
+    <div class="menu-panel" id="panel-sandwiches">
+      <div class="menu-section-title">Peter Pannini <span class="ornament">—</span> Sandwiches</div>
+      <div class="menu-section-note">"Pressed between pages of flavor."</div>
+      <div class="menu-grid" id="menu-sandwiches"></div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="menu-panel" id="panel-burgers">
+      <div class="menu-section-title">Of Spice & Men <span class="ornament">—</span> Burgers</div>
+      <div class="menu-section-note">"Big, bold, and impossible to put down."</div>
+      <div class="menu-grid" id="menu-burgers"></div>
+    </div>
+
+    <!-- GRILLS -->
+    <div class="menu-panel" id="panel-grills">
+      <div class="menu-section-title">Gone Grill <span class="ornament">—</span> Grills</div>
+      <div class="menu-section-note">"Char-kissed tales from the open flame."</div>
+      <div class="menu-grid" id="menu-grills"></div>
+    </div>
+
+    <!-- PASTA -->
+    <div class="menu-panel" id="panel-pasta">
+      <div class="menu-section-title">Alfredo In Wonderland <span class="ornament">—</span> Pasta</div>
+      <div class="menu-section-note">"Fall deliciously into a world of Italian wonder."</div>
+      <div class="menu-grid" id="menu-pasta"></div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="menu-panel" id="panel-pizza">
+      <div class="menu-section-title">Discovery of India <span class="ornament">—</span> Pizza</div>
+      <div class="menu-section-note">"Where East meets West on a crispy canvas."</div>
+      <div class="menu-grid" id="menu-pizza"></div>
+    </div>
+
+    <!-- SALADS -->
+    <div class="menu-panel" id="panel-salads">
+      <div class="menu-section-title">Zucchini In The Bottle <span class="ornament">—</span> Salads</div>
+      <div class="menu-section-note">"Fresh chapters in every bowl."</div>
+      <div class="menu-grid" id="menu-salads"></div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="menu-panel" id="panel-starters">
+      <div class="menu-section-title">To Spill A Mockingtale <span class="ornament">—</span> Starters</div>
+      <div class="menu-section-note">"The prologue to your perfect meal."</div>
+      <div class="menu-grid" id="menu-starters"></div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-panel" id="panel-desserts">
+      <div class="menu-section-title">Bridget Jones' Dairy <span class="ornament">—</span> Desserts</div>
+      <div class="menu-section-note">"The sweet epilogue every story deserves."</div>
+      <div class="menu-grid" id="menu-desserts"></div>
+    </div>
+
+    <!-- BEVERAGES -->
+    <div class="menu-panel" id="panel-beverages">
+      <div class="menu-section-title">The Coffee Maker <span class="ornament">—</span> Beverages</div>
+      <div class="menu-section-note">"Sip slowly. Every drop tells a story."</div>
+      <div class="menu-grid" id="menu-beverages"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE AT HEDGEHOG (Instagram Reels) -->
+<section id="life-at-hedgehog" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <span class="section-label">Instagram · @the_hedgehog_cafe</span>
+      <h2 class="section-title">Life at <span class="italic">Hedgehog</span></h2>
+      <p class="section-body">Real moments. Real people. Real food. Follow our story on Instagram.</p>
+    </div>
+    <div class="reels-carousel" id="reelsCarousel">
+      <!-- Instagram Reels Embeds -->
+      <div class="reel-card">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/the_hedgehog_cafe/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:280px;padding:0;width:99.375%;width:-webkit-calc(100% - 2px);width:calc(100% - 2px);">
+        </blockquote>
+        <div class="reel-placeholder">
+          <i class="fab fa-instagram"></i>
+          <span>@the_hedgehog_cafe<br>Follow us on Instagram</span>
+          <a href="https://www.instagram.com/the_hedgehog_cafe/" target="_blank" style="color:var(--gold);font-family:var(--font-ui);font-size:0.75rem;text-decoration:none;border:1px solid var(--gold);padding:8px 16px;margin-top:8px;">View Profile</a>
+        </div>
+        <div class="reel-ig-overlay"><i class="fab fa-instagram"></i> @the_hedgehog_cafe</div>
+      </div>
+      <div class="reel-card">
+        <div class="reel-placeholder">
+          <i class="fas fa-utensils" style="color:var(--gold);font-size:2.5rem;opacity:0.7;"></i>
+          <span>English Breakfast<br>The classic that started it all</span>
+        </div>
+        <div class="reel-ig-overlay"><i class="fab fa-instagram"></i> @the_hedgehog_cafe</div>
+      </div>
+      <div class="reel-card">
+        <div class="reel-placeholder">
+          <i class="fas fa-book-open" style="color:var(--gold);font-size:2.5rem;opacity:0.7;"></i>
+          <span>Our library wall<br>Thousands of stories await</span>
+        </div>
+        <div class="reel-ig-overlay"><i class="fab fa-instagram"></i> @the_hedgehog_cafe</div>
+      </div>
+      <div class="reel-card">
+        <div class="reel-placeholder">
+          <i class="fas fa-coffee" style="color:var(--gold);font-size:2.5rem;opacity:0.7;"></i>
+          <span>Cappuccino Tart<br>Sweet, strong, unforgettable</span>
+        </div>
+        <div class="reel-ig-overlay"><i class="fab fa-instagram"></i> @the_hedgehog_cafe</div>
+      </div>
+      <div class="reel-card">
+        <div class="reel-placeholder">
+          <i class="fas fa-pizza-slice" style="color:var(--gold);font-size:2.5rem;opacity:0.7;"></i>
+          <span>Paneer Tikka Pizza<br>A Discovery of India</span>
+        </div>
+        <div class="reel-ig-overlay"><i class="fab fa-instagram"></i> @the_hedgehog_cafe</div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" onclick="scrollReels(-300)"><i class="fas fa-chevron-left"></i></button>
+      <a href="https://www.instagram.com/the_hedgehog_cafe/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-family:var(--font-ui);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;text-decoration:none;transition:all 0.3s;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'"><i class="fab fa-instagram"></i> Follow @the_hedgehog_cafe</a>
+      <button class="carousel-btn" onclick="scrollReels(300)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <span class="section-label">Photo Gallery</span>
+      <h2 class="section-title">The <span class="italic">Ambiance</span></h2>
+      <p class="section-body">Wood‑panelled walls, shelves of books, warm amber light — step inside The Hedgehog.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#2d1200,#5c2a00);">
+          <img src="images/gallery1.jpg" alt="Cafe Interior" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          📚
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">The Book Wall — our signature interior</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#1a0900,#3d1a00);">
+          <img src="images/gallery2.jpg" alt="Breakfast" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🍳
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">The English Breakfast</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#3d1a00,#2d1200);">
+          <img src="images/gallery3.jpg" alt="Burger" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🍔
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Gourmet Burgers</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(160deg,#1a0800,#4a2000);">
+          <img src="images/menu-breakfast.jpg" alt="Menu Breakfast" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          ☕
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Morning coffee ritual</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#2d1200,#1a0800);">
+          <img src="images/menu-pizza.jpg" alt="Pizza" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🍕
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Discovery of India — Pizza</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#3d1a00,#1a0900);">
+          <img src="images/menu-burgers.jpg" alt="Burger" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🥩
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Grill selection</div></div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(135deg,#2d1000,#5c2a00);">
+          <img src="images/menu-desserts.jpg" alt="Desserts" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🎂
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Mississippi Mud Cake</div></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <div class="gallery-img-placeholder" style="background:linear-gradient(160deg,#1a0900,#4a2000);">
+          <img src="images/bg-bookshelf.jpg" alt="Bookshelf" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
+          🦔
+        </div>
+        <div class="gallery-overlay"><div class="gallery-caption">Our story-filled shelves</div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://www.instagram.com/the_hedgehog_cafe/" target="_blank" class="btn-hero btn-outline" style="font-size:0.78rem;padding:12px 32px;display:inline-block;"><i class="fab fa-instagram" style="margin-right:8px;"></i>See More on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reservation" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:60px;text-align:center;">
+      <span class="section-label">Reserve Your Table</span>
+      <h2 class="section-title" style="text-align:center;">Book Your <span class="italic">Chapter</span></h2>
+      <p class="section-body" style="margin:0 auto;text-align:center;">Secure your spot in Chandigarh's most literary dining destination.</p>
+    </div>
+    <div class="reservation-grid">
+      <div class="reservation-form-card reveal">
+        <h3 style="font-family:var(--font-display);font-size:1.3rem;color:var(--gold);margin-bottom:28px;">Reserve a Table</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your name" id="res-name">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="+91 xxxxxxxxxx" id="res-mobile">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com" id="res-email">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="res-date">
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <select id="res-time">
+              <option>09:30 AM</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>12:00 PM</option>
+              <option>01:00 PM</option>
+              <option>02:00 PM</option>
+              <option>03:00 PM</option>
+              <option>04:00 PM</option>
+              <option>05:00 PM</option>
+              <option>06:00 PM</option>
+              <option>07:00 PM</option>
+              <option>08:00 PM</option>
+              <option>09:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <select id="res-guests">
+            <option>1 Guest</option>
+            <option selected>2 Guests</option>
+            <option>3 Guests</option>
+            <option>4 Guests</option>
+            <option>5 Guests</option>
+            <option>6+ Guests</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Special Requests</label>
+          <textarea placeholder="Anniversary, dietary requirements, high chair..." rows="3" id="res-notes" style="resize:none;"></textarea>
+        </div>
+        <button class="btn-reserve" onclick="submitReservation()">Confirm Reservation</button>
+      </div>
+      <div class="reservation-info reveal reveal-delay-2">
+        <h3 style="font-family:var(--font-display);font-size:1.3rem;color:var(--cream);margin-bottom:8px;">Also reserve via</h3>
+        <p style="font-family:var(--font-text);font-size:0.95rem;color:rgba(245,237,224,0.45);margin-bottom:28px;">Book through our partner platforms for exclusive offers.</p>
+        <div class="platform-links">
+          <a href="https://www.zomato.com/chandigarh/the-hedgehog-caf%C3%A9-sector-7" target="_blank" class="platform-link">
+            <div class="platform-icon">🍽️</div>
+            <div class="platform-text">
+              <strong>Zomato</strong>
+              <span>Order delivery or book a table</span>
+            </div>
+            <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--gold);opacity:0.5;font-size:0.8rem;"></i>
+          </a>
+          <a href="https://www.eazydiner.com/chandigarh/the-hedgehog-cafe-sector-7-chandigarh-653848" target="_blank" class="platform-link">
+            <div class="platform-icon">🌟</div>
+            <div class="platform-text">
+              <strong>EazyDiner</strong>
+              <span>Up to 50% off + exclusive deals</span>
+            </div>
+            <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--gold);opacity:0.5;font-size:0.8rem;"></i>
+          </a>
+          <a href="https://district.in" target="_blank" class="platform-link">
+            <div class="platform-icon">📍</div>
+            <div class="platform-text">
+              <strong>District.in</strong>
+              <span>Events & dining experiences</span>
+            </div>
+            <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--gold);opacity:0.5;font-size:0.8rem;"></i>
+          </a>
+        </div>
+        <div class="reservation-hours">
+          <div class="hours-title">Opening Hours</div>
+          <div class="hours-row"><span>Monday – Friday</span><span>09:30 AM – 11:00 PM</span></div>
+          <div class="hours-row"><span>Saturday</span><span>09:30 AM – 11:30 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span>09:30 AM – 11:30 PM</span></div>
+        </div>
+        <div style="margin-top:24px;padding:20px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);">
+          <p style="font-family:var(--font-text);font-size:0.95rem;color:rgba(245,237,224,0.6);line-height:1.6;">
+            <span style="color:var(--gold);">📞 Walk-ins Welcome.</span> For same-day bookings, call us at<br>
+            <a href="tel:+911724730478" style="color:var(--gold);text-decoration:none;font-size:1.05rem;">+91 172 473 0478</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <span class="section-label">What People Say</span>
+      <h2 class="section-title">Guest <span class="italic">Reviews</span></h2>
+      <p class="section-body">4,000+ reviews across platforms. Here are some of the best chapters our guests have written.</p>
+    </div>
+    <div class="reviews-stats reveal">
+      <div class="review-stat">
+        <span class="review-stat-num">4.3★</span>
+        <span class="review-stat-label">Google Rating</span>
+      </div>
+      <div class="review-stat">
+        <span class="review-stat-num">4.2★</span>
+        <span class="review-stat-label">Justdial Rating</span>
+      </div>
+      <div class="review-stat">
+        <span class="review-stat-num">4.7★</span>
+        <span class="review-stat-label">EazyDiner Rating</span>
+      </div>
+      <div class="review-stat">
+        <span class="review-stat-num">4,000+</span>
+        <span class="review-stat-label">Total Reviews</span>
+      </div>
+    </div>
+    <div class="reviews-slider reveal">
+      <div class="reviews-track" id="reviewsTrack">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">This isn't a café but a library, or better still a book lover's paradise, that also serves food! The passion with which the owners have decked up the cozy space with books is commendable. Their hazelnut cold coffee and pastas are absolutely divine.</p>
+          <div class="review-author">
+            <div class="review-avatar">R</div>
+            <div class="review-author-info">
+              <strong>Rahul S.</strong>
+              <span>Tripadvisor · Chandigarh</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">There's something about The Hedgehog Café that instantly slows you down — not in a dull way, but in that calm, focused energy that makes you want to stay for hours. The Wi-Fi is reliable, seating comfortable, and the food is surprisingly good.</p>
+          <div class="review-author">
+            <div class="review-avatar">P</div>
+            <div class="review-author-info">
+              <strong>Priya M.</strong>
+              <span>Google Reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Amazing experience! Good food and amazing staff. Mr. Chandan is an incredible host. The English Breakfast is the best in Chandigarh — perfectly done eggs, crispy bacon and that gorgeous toast. The Peter Pan Cake is a must-try!</p>
+          <div class="review-author">
+            <div class="review-avatar">A</div>
+            <div class="review-author-info">
+              <strong>Amanpreet K.</strong>
+              <span>Zomato · Regular</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">A colorful, dynamic space with casual seating and books stacked up against the wall. It's like everyone's collective dreams come true! Their pastas and sandwiches are consistent hits. The Moby Stick is my personal favorite.</p>
+          <div class="review-author">
+            <div class="review-avatar">S</div>
+            <div class="review-author-info">
+              <strong>Sanya T.</strong>
+              <span>Magicpin · Chandigarh</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Tucked in Sector 7, one of those places that quietly earns your respect. The interiors are warm but not flashy, with subtle lighting and books everywhere. Cappuccino is strong and well-balanced. Brownie and cheesecake both hit the spot perfectly.</p>
+          <div class="review-author">
+            <div class="review-avatar">V</div>
+            <div class="review-author-info">
+              <strong>Vikas D.</strong>
+              <span>Restaurant Guru</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">A cozy haven where you can read, work, eat or just chill out with friends and family, surrounded with books and good music. Here, you can hear authors read from their books, tap your feet with live bands — it's the perfect Chandigarh spot.</p>
+          <div class="review-author">
+            <div class="review-avatar">N</div>
+            <div class="review-author-info">
+              <strong>Neha R.</strong>
+              <span>Shoutlo · Verified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-nav" id="reviewsNav">
+      <button class="review-dot active" onclick="goToReview(0)"></button>
+      <button class="review-dot" onclick="goToReview(1)"></button>
+      <button class="review-dot" onclick="goToReview(2)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & MAP -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px;">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">Come <span class="italic">Visit</span> Us</h2>
+      <p class="section-body">We're right in the heart of Chandigarh's Inner Market, Sector 7‑C.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-detail">
+            <strong>Address</strong>
+            <span>SCF 12, Near Inner Market<br>Sector 7‑C, Chandigarh – 160019</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div class="contact-detail">
+            <strong>Phone</strong>
+            <a href="tel:+911724730478">+91 172 473 0478</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-detail">
+            <strong>Hours</strong>
+            <span>Mon–Sun: 09:30 AM – 11:00 PM</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-utensils"></i></div>
+          <div class="contact-detail">
+            <strong>Cuisine</strong>
+            <span>Italian · Continental · Breakfast<br>Burgers · Pizza · Fast Food</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-tag"></i></div>
+          <div class="contact-detail">
+            <strong>Price for Two</strong>
+            <span>₹1,200 – ₹1,500 approx.</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/the_hedgehog_cafe/" target="_blank" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/thehedgehogcafe/" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.zomato.com/chandigarh/the-hedgehog-caf%C3%A9-sector-7" target="_blank" class="social-link" title="Zomato"><i class="fas fa-utensils"></i></a>
+          <a href="tel:+911724730478" class="social-link" title="Call Us"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.1245!2d76.7905!3d30.7430!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fef1e1e1e1e1f%3A0x1234567890abcdef!2sThe%20Hedgehog%20Cafe%2C%20SCF%2012%2C%20Inner%20Market%2C%20Sector%207-C%2C%20Chandigarh!5e0!3m2!1sen!2sin!4v1234567890"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🦔</div>
+          <div>
+            <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:700;">The Hedgehog Café</div>
+            <div style="font-family:var(--font-ui);font-size:0.68rem;color:rgba(245,237,224,0.4);letter-spacing:0.15em;text-transform:uppercase;">Chandigarh · Est. 2015</div>
+          </div>
+        </div>
+        <p>A book‑lined, wood‑panelled haven in the heart of Chandigarh, where every dish tells a story and every corner invites you to stay longer.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#menu" onclick="switchTab('breakfast')">Breakfast</a></li>
+          <li><a href="#menu" onclick="switchTab('burgers')">Burgers</a></li>
+          <li><a href="#menu" onclick="switchTab('pizza')">Pizza</a></li>
+          <li><a href="#menu" onclick="switchTab('pasta')">Pasta</a></li>
+          <li><a href="#menu" onclick="switchTab('desserts')">Desserts</a></li>
+          <li><a href="#menu" onclick="switchTab('beverages')">Beverages</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#reservation">Reserve a Table</a></li>
+          <li><a href="https://www.zomato.com/chandigarh/the-hedgehog-caf%C3%A9-sector-7" target="_blank">Order on Zomato</a></li>
+          <li><a href="https://www.eazydiner.com/chandigarh/the-hedgehog-cafe-sector-7-chandigarh-653848" target="_blank">EazyDiner Deals</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Directions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/the_hedgehog_cafe/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.facebook.com/thehedgehogcafe/" target="_blank">Facebook</a></li>
+          <li><a href="tel:+911724730478">+91 172 473 0478</a></li>
+          <li><a href="#contact">SCF 12, Sector 7‑C</a></li>
+          <li><a href="#contact">Chandigarh – 160019</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 The Hedgehog Café · All rights reserved · Sector 7‑C, Chandigarh</span>
+      <span class="footer-tagline">"Every Dish Has a Tale."</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Instagram embed script -->
+<script async src="//www.instagram.com/embed.js"></script>
+
+<script>
+/* ═══════════════════════════════════════════
+   MENU DATA
+═══════════════════════════════════════════ */
+const menuData = {
+  breakfast: [
+    { name: "The English Breakfast", price: 380, desc: "Two eggs (any style), baked beans, grilled tomato, sautéed mushrooms, toast & butter. The classic that started it all.", veg: false, emoji: "🍳" },
+    { name: "The Catcher Of The Fry", price: 525, desc: "Eggs, bacon rashers, chicken sausage, baked beans, hash browns & toast. A full non-veg spread.", veg: false, emoji: "🥓" },
+    { name: "Peter Pan Cake", price: 475, desc: "Fluffy stack of pancakes with maple syrup, seasonal berries & whipped cream. Pure magic.", veg: true, emoji: "🥞" },
+    { name: "Order Of The Eggs With Chicken Sausages", price: 435, desc: "Three eggs prepared your way with premium chicken sausages & grilled toast.", veg: false, emoji: "🍳" },
+    { name: "Order Of The Eggs With Chicken Ham", price: 535, desc: "Eggs done your way paired with sliced chicken ham, fresh salad & toast.", veg: false, emoji: "🥚" }
+  ],
+  sandwiches: [
+    { name: "Peter Pannini – Veg", price: 295, desc: "Grilled panini stuffed with roasted veggies, pesto, sun-dried tomatoes & mozzarella. A vegetarian classic.", veg: true, emoji: "🥪" },
+    { name: "Peter Pannini – Chicken", price: 345, desc: "Grilled panini with seasoned chicken breast, caramelised onions, peppers & melted cheese.", veg: false, emoji: "🥪" },
+    { name: "Gone With The Sandwich", price: 315, desc: "Toasted white/brown bread with choice of filling, crisp greens & house sauce.", veg: true, emoji: "🥖" },
+    { name: "Moby Sandwich", price: 365, desc: "Layered club sandwich with chicken, bacon, lettuce, tomato & garlic aioli.", veg: false, emoji: "🥖" }
+  ],
+  burgers: [
+    { name: "The Chicken Farm Chicken", price: 590, desc: "Crispy-fried chicken thigh, coleslaw, pickles, lettuce & chipotle mayo in a brioche bun.", veg: false, emoji: "🍔" },
+    { name: "The Chicken Farm Bacon", price: 615, desc: "Juicy chicken patty, smoked bacon, cheddar, pickles & BBQ sauce. The crowd favourite.", veg: false, emoji: "🍔" },
+    { name: "Of Spice & Men Chicken", price: 540, desc: "Spiced chicken patty, jalapeños, pepper-jack cheese, siracha & lettuce.", veg: false, emoji: "🌶️" },
+    { name: "Of Spice & Men Bacon", price: 605, desc: "Double patty with bacon, spiced sauce, onion rings & extra cheddar.", veg: false, emoji: "🌶️" },
+    { name: "The Veg Farm Classic", price: 445, desc: "Crispy potato-veggie patty, lettuce, tomato, pickles & house mayo in a brioche bun.", veg: true, emoji: "🥬" },
+    { name: "Garden of Edam", price: 475, desc: "Beetroot & chickpea patty, avocado, sprouts, tomato & tahini.", veg: true, emoji: "🥗" }
+  ],
+  grills: [
+    { name: "Gone Grill – Chicken", price: 495, desc: "Herb-marinated chicken breast grilled to perfection, served with chimichurri & fries.", veg: false, emoji: "🍗" },
+    { name: "Moby Stick", price: 525, desc: "Skewered chicken chunks, bell peppers & onions in a smoky paprika marinade.", veg: false, emoji: "🍢" },
+    { name: "Don Corn Bacon", price: 545, desc: "Smoked bacon-wrapped corn grilled on open flame with herb butter glaze.", veg: false, emoji: "🌽" },
+    { name: "Zucchini In The Bottle", price: 395, desc: "Grilled zucchini, portobello mushroom & capsicum in balsamic glaze. Vegan & delicious.", veg: true, emoji: "🥒" },
+    { name: "The Himalaya Grill", price: 465, desc: "Tandoor-spiced paneer tikka with mint chutney and pickled onions.", veg: true, emoji: "🏔️" }
+  ],
+  pasta: [
+    { name: "Alfredo In Wonderland", price: 395, desc: "Pappardelle in rich parmesan cream sauce, button mushrooms & truffle oil. Signature dish.", veg: true, emoji: "🍝" },
+    { name: "Arrabbiata of Dorian Gray", price: 375, desc: "Penne in spicy tomato-basil sauce, capers, olives & fresh chilli. Bold & fiery.", veg: true, emoji: "🌶️" },
+    { name: "Olio Spaghetti", price: 380, desc: "Classic aglio e olio with garlic-chilli oil, parsley & a shower of parmesan.", veg: true, emoji: "🍝" },
+    { name: "Chicken Carbonara", price: 445, desc: "Spaghetti in egg-cream sauce with chicken bacon lardons & black pepper.", veg: false, emoji: "🥚" },
+    { name: "Chicken Penne Rosso", price: 435, desc: "Penne in rich tomato-cream with grilled chicken strips, sun-dried tomatoes & basil.", veg: false, emoji: "🍅" },
+    { name: "Ravioli Al Burro", price: 455, desc: "Cheese-stuffed ravioli in sage-brown butter, walnut crumble & parmesan.", veg: true, emoji: "🧀" },
+    { name: "Meat Balls & Spaghetti", price: 475, desc: "Juicy chicken meatballs in slow-cooked marinara, served over spaghetti.", veg: false, emoji: "🍝" },
+    { name: "Pesto Farfalle", price: 390, desc: "Bow-tie pasta tossed in house-made basil pesto, pine nuts & cherry tomatoes.", veg: true, emoji: "🌿" }
+  ],
+  pizza: [
+    { name: "Pizza Paneer Tikka", price: 495, desc: "Tandoor-marinated paneer, capsicum, onion & mint chutney on a garlic base. Indian fusion.", veg: true, emoji: "🍕" },
+    { name: "Pizza Chicken Tikka", price: 525, desc: "Grilled chicken tikka chunks, pickled onions, jalapeños & mozzarella on a spiced base.", veg: false, emoji: "🍕" },
+    { name: "Paneer Makhani Pizza", price: 495, desc: "Creamy makhani sauce base, diced paneer, capsicum & a drizzle of cream.", veg: true, emoji: "🧡" },
+    { name: "Chicken Makhani Pizza", price: 525, desc: "Buttery makhani base with shredded chicken, caramelised onions & mozzarella.", veg: false, emoji: "🧡" },
+    { name: "Soya Keema Pao", price: 390, desc: "Spiced soya keema in toasted pav buns with coriander & green chutney. Street-style.", veg: true, emoji: "🌮" },
+    { name: "Chicken Keema Pao", price: 445, desc: "Minced chicken keema, buttered pav with pickled chillies & house masala.", veg: false, emoji: "🌮" },
+    { name: "Margherita", price: 425, desc: "San Marzano tomato sauce, fresh mozzarella, basil & extra-virgin olive oil. Timeless.", veg: true, emoji: "🍕" }
+  ],
+  salads: [
+    { name: "Caesar of the Mist", price: 345, desc: "Romaine, croutons, parmesan shavings in house Caesar dressing — add grilled chicken for 60.", veg: true, emoji: "🥗" },
+    { name: "Mediterranean Dream", price: 365, desc: "Cucumber, tomato, kalamata olives, feta, red onion & herb vinaigrette.", veg: true, emoji: "🫒" },
+    { name: "Grilled Chicken Salad", price: 395, desc: "Mixed greens, grilled chicken breast, cherry tomatoes, avocado & balsamic.", veg: false, emoji: "🥑" },
+    { name: "Tomato Basil Soup + Salad", price: 325, desc: "Roasted tomato basil soup paired with a fresh garden salad. Soul-warming combo.", veg: true, emoji: "🍅" }
+  ],
+  starters: [
+    { name: "Moby Stick Starter", price: 295, desc: "Crispy chicken skewers with smoky chipotle dip. Popular bar-style snack.", veg: false, emoji: "🍢" },
+    { name: "Mushroom Bruschetta", price: 265, desc: "Toasted baguette with sautéed wild mushrooms, truffle oil & fresh herbs.", veg: true, emoji: "🍄" },
+    { name: "Don Corn Fritters", price: 255, desc: "Crispy corn & jalapeno fritters with sour cream & sweet chilli dip.", veg: true, emoji: "🌽" },
+    { name: "Chicken Wings", price: 375, desc: "Six bone-in wings in buffalo sauce with celery sticks & blue cheese dip.", veg: false, emoji: "🍗" },
+    { name: "Nachos Grande", price: 295, desc: "Tortilla chips loaded with salsa, guacamole, sour cream & jalapeños.", veg: true, emoji: "🫔" },
+    { name: "Fish & Chips", price: 395, desc: "Beer-battered fish fillet with thick-cut fries & tartar sauce.", veg: false, emoji: "🐟" }
+  ],
+  desserts: [
+    { name: "Mississippi Mud Cake", price: 240, desc: "Dense, fudgy chocolate cake with ganache drizzle. A chocoholic's dream.", veg: true, emoji: "🎂" },
+    { name: "Cappuccino Tart", price: 260, desc: "Coffee custard tart in a buttery shell with espresso glaze. Signature dessert.", veg: true, emoji: "☕" },
+    { name: "Blueberry Cheesecake", price: 295, desc: "New York-style cheesecake with fresh blueberry compote on a graham cracker crust.", veg: true, emoji: "🫐" },
+    { name: "Nutella Cheese Mousse Cake", price: 265, desc: "Velvety Nutella mousse over mascarpone on a hazelnut sponge.", veg: true, emoji: "🍫" },
+    { name: "Oreo Cookie Shake", price: 230, desc: "Thick Oreo milkshake blended with vanilla ice cream & crushed cookies.", veg: true, emoji: "🍪" },
+    { name: "Brownie with Ice Cream", price: 260, desc: "Warm dark chocolate brownie served with a scoop of vanilla ice cream.", veg: true, emoji: "🍨" },
+    { name: "Blueberry Cake", price: 255, desc: "Moist vanilla sponge layered with blueberry jam & cream cheese frosting.", veg: true, emoji: "💜" }
+  ],
+  beverages: [
+    { name: "Hazelnut Cold Coffee", price: 215, desc: "Cold brew blended with hazelnut syrup, milk & ice. The house favourite.", veg: true, emoji: "☕" },
+    { name: "Cappuccino", price: 175, desc: "Double espresso, steamed milk & thick velvety foam. Strong & balanced.", veg: true, emoji: "☕" },
+    { name: "Café Frappe", price: 205, desc: "Iced blended coffee with caramel drizzle & whipped cream.", veg: true, emoji: "🧋" },
+    { name: "The Himalaya", price: 245, desc: "A signature house mocktail — mint, lemon, honey & a hint of ginger over crushed ice.", veg: true, emoji: "🏔️" },
+    { name: "Iced Latte", price: 185, desc: "Double espresso over ice with cold milk. Clean & refreshing.", veg: true, emoji: "🥛" },
+    { name: "Strawberry Milkshake", price: 215, desc: "Fresh strawberry blended with vanilla ice cream & whole milk.", veg: true, emoji: "🍓" },
+    { name: "Vanilla Milkshake", price: 195, desc: "Classic vanilla shake with premium ice cream — thick, creamy & indulgent.", veg: true, emoji: "🍦" },
+    { name: "Fresh Lime Soda", price: 145, desc: "Sparkling water, fresh lime, sugar & a pinch of black salt. Perfectly refreshing.", veg: true, emoji: "🍋" }
+  ]
+};
+
+/* ═══════════════════════════════════════════
+   CART STATE
+═══════════════════════════════════════════ */
+let cart = [];
+let cartOpen = false;
+
+function addToCart(name, price) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) { existing.qty++; }
+  else { cart.push({ name, price, qty: 1 }); }
+  updateCartUI();
+  document.getElementById('cart-widget').style.display = 'block';
+  showToast(`✓ ${name} added to order`);
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = `₹${total}`;
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty">Your table is empty — start ordering!</div>';
+  } else {
+    itemsEl.innerHTML = cart.map((item, i) =>
+      `<div class="cart-item">
+        <span>${item.qty > 1 ? `${item.qty}× ` : ''}${item.name}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="cart-item-price">₹${item.price * item.qty}</span>
+          <button onclick="removeFromCart(${i})" style="background:none;border:none;color:rgba(245,237,224,0.3);cursor:pointer;font-size:0.85rem;">✕</button>
+        </div>
+      </div>`
+    ).join('');
+  }
+}
+
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  updateCartUI();
+}
+
+function toggleCart() {
+  cartOpen = !cartOpen;
+  document.getElementById('cartPanel').classList.toggle('open', cartOpen);
+}
+
+function checkout() {
+  if (cart.length === 0) { showToast('Please add items to your order first.'); return; }
+  showToast('🎉 Order placed! We\'ll see you soon at The Hedgehog!');
+  cart = [];
+  cartOpen = false;
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('cart-widget').style.display = 'none';
+  updateCartUI();
+}
+
+/* ═══════════════════════════════════════════
+   RENDER MENU CARDS
+═══════════════════════════════════════════ */
+function renderMenu() {
+  const imgMap = { breakfast: 'menu-breakfast', burgers: 'menu-burgers', pizza: 'menu-pizza', desserts: 'menu-desserts' };
+  Object.entries(menuData).forEach(([cat, items]) => {
+    const el = document.getElementById(`menu-${cat}`);
+    if (!el) return;
+    el.innerHTML = items.map((item, i) => {
+      const imgSrc = imgMap[cat] ? `images/${imgMap[cat]}.jpg` : null;
+      const imgHTML = imgSrc
+        ? `<img src="${imgSrc}" alt="${item.name}" class="menu-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+           <div class="menu-card-img-placeholder" style="display:none;background:linear-gradient(135deg,#1a0900,#3d1a00);">${item.emoji}</div>`
+        : `<div class="menu-card-img-placeholder" style="background:linear-gradient(135deg,#1a0900,#3d1a00);">${item.emoji}</div>`;
+      const badge = item.veg
+        ? `<span class="veg-badge"><span class="veg-dot"></span>Veg</span>`
+        : `<span class="nonveg-badge"><span class="nonveg-dot"></span>Non‑Veg</span>`;
+      return `
+        <div class="menu-card reveal reveal-delay-${(i % 4) + 1}">
+          ${imgHTML}
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <div class="menu-card-name">${item.name}</div>
+              <div class="menu-card-price">₹${item.price}</div>
+            </div>
+            <div class="menu-card-desc">${item.desc}</div>
+            <div class="menu-card-footer">
+              ${badge}
+              <button class="btn-add" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})">Add to Order</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+    // Re-observe new cards
+    el.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
+}
+
+/* ═══════════════════════════════════════════
+   MENU TABS
+═══════════════════════════════════════════ */
+function switchTab(tabId) {
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  const tab = document.querySelector(`[data-tab="${tabId}"]`);
+  const panel = document.getElementById(`panel-${tabId}`);
+  if (tab) tab.classList.add('active');
+  if (panel) panel.classList.add('active');
+  setTimeout(() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }), 50);
+}
+
+document.getElementById('menuTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.menu-tab');
+  if (!tab) return;
+  switchTab(tab.dataset.tab);
+});
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ═══════════════════════════════════════════
+   NAVBAR SCROLL
+═══════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════ */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a, button, .menu-card, .gallery-item').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+/* ═══════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════ */
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════
+   REELS CAROUSEL
+═══════════════════════════════════════════ */
+function scrollReels(delta) {
+  document.getElementById('reelsCarousel').scrollBy({ left: delta, behavior: 'smooth' });
+}
+
+/* ═══════════════════════════════════════════
+   REVIEWS SLIDER
+═══════════════════════════════════════════ */
+let reviewIdx = 0;
+function goToReview(idx) {
+  const track = document.getElementById('reviewsTrack');
+  const cards = track.querySelectorAll('.review-card');
+  const perView = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+  reviewIdx = Math.max(0, Math.min(idx, cards.length - perView));
+  const cardW = cards[0] ? cards[0].offsetWidth + 24 : 360;
+  track.style.transform = `translateX(-${reviewIdx * cardW}px)`;
+  document.querySelectorAll('.review-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+setInterval(() => {
+  const cards = document.querySelectorAll('.review-card');
+  const perView = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+  reviewIdx = (reviewIdx + 1) % Math.max(1, cards.length - perView + 1);
+  goToReview(reviewIdx);
+}, 6000);
+
+/* ═══════════════════════════════════════════
+   RESERVATION SUBMIT
+═══════════════════════════════════════════ */
+function submitReservation() {
+  const name = document.getElementById('res-name').value.trim();
+  const mobile = document.getElementById('res-mobile').value.trim();
+  const email = document.getElementById('res-email').value.trim();
+  const date = document.getElementById('res-date').value;
+  const time = document.getElementById('res-time').value;
+  const guests = document.getElementById('res-guests').value;
+  if (!name || !mobile || !date) { showToast('Please fill in your name, mobile & date.'); return; }
+  showToast(`🦔 Table confirmed for ${name} · ${guests} · ${date} at ${time}`);
+  ['res-name','res-mobile','res-email','res-date','res-notes'].forEach(id => document.getElementById(id).value = '');
+}
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* ═══════════════════════════════════════════
+   INTRO REMOVAL
+═══════════════════════════════════════════ */
+setTimeout(() => {
+  const intro = document.getElementById('book-intro');
+  if (intro) { intro.style.display = 'none'; }
+}, 4500);
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+renderMenu();
+
+// Set min date for reservation to today
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('res-date').min = today;
+document.getElementById('res-date').value = today;
+
+// Parallax on hero bg
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-bg');
+  if (hero) { hero.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`; }
+});
+
+// 3D tilt on gallery items
+document.querySelectorAll('.gallery-item').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `scale(1.03) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+// Smooth reveal for dynamically added elements after render
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}, 100);
+</script>
+</body>
+</html>
